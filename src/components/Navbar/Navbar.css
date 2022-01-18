@@ -1,0 +1,19 @@
+input:checked ~ label > .h1 {
+    transform: rotate(45deg) translate(4px, 4px);
+}
+
+input:checked ~ label > .h2 {
+    opacity: 0;
+}
+
+input:checked ~ label > .h3 {
+    transform: rotate(-45deg) translate(4px, -4px);
+}
+
+label span {
+    transition: 0.5s ease all;
+}
+
+.hamburger-checkbox {
+    display: none;
+}
