@@ -108,7 +108,9 @@ function Login() {
             body: JSON.stringify(payload),
         };
 
-        const response = await fetch('/login', options);
+        const response = await fetch("https://crypto-bulls-back.herokuapp.com/login",
+            options
+        );
         const result = await response.json();
         
         console.log(response);
