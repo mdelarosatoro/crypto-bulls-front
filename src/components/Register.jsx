@@ -116,7 +116,7 @@ function Login() {
             body: JSON.stringify(payload),
         };
 
-        const response = await fetch('/users/create', options);
+        const response = await fetch('https://crypto-bulls-back.herokuapp.com/users/create', options);
         const result = await response.json();
         
         console.log(response);
@@ -139,7 +139,7 @@ function Login() {
             body: JSON.stringify(payload),
         };
 
-        const response = await fetch('/login', options);
+        const response = await fetch('https://crypto-bulls-back.herokuapp.com/login', options);
         const result = await response.json();
 
         if (result.token) {
@@ -153,7 +153,7 @@ function Login() {
                 method: 'GET',
             }
 
-            const myInfoResponse = await fetch('/users/my-info', options2);
+            const myInfoResponse = await fetch('https://crypto-bulls-back.herokuapp.com/users/my-info', options2);
             const myInfoResult = await myInfoResponse.json();
             console.log(myInfoResult);
             if (myInfoResult) {

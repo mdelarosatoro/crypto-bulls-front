@@ -37,19 +37,19 @@ function App() {
           method: 'GET',
       }
 
-      const myInfoResponse = await fetch('/users/my-info', options);
+      const myInfoResponse = await fetch('https://crypto-bulls-back.herokuapp.com//users/my-info', options);
       const myInfoResult = await myInfoResponse.json();
 
       if (myInfoResult) {
           dispatch(login(myInfoResult));
 
-          const responsePortfolio = await fetch (`/users/portfolio`, options);
+          const responsePortfolio = await fetch (`https://crypto-bulls-back.herokuapp.com//users/portfolio`, options);
           const resultPortfolio = await responsePortfolio.json();
           dispatch(updatePortfolio(resultPortfolio))
       }
     } catch (error) {
       console.log(error.message);
-      navigate('/login');
+      navigate('https://crypto-bulls-back.herokuapp.com//login');
     }
   }
 

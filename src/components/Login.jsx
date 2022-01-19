@@ -125,7 +125,7 @@ function Login() {
                 method: 'GET',
             }
 
-            const myInfoResponse = await fetch('/users/my-info', options2);
+            const myInfoResponse = await fetch('https://crypto-bulls-back.herokuapp.com/users/my-info', options2);
             const myInfoResult = await myInfoResponse.json();
             console.log(myInfoResult);
             if (myInfoResult) {
