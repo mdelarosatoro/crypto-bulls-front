@@ -18,63 +18,63 @@ const AppContainer = styled.div`
 `;
 
 function App() {
-  const [mobileMenuToggle, setMobileMenuToggle] = useState(false);
-  const [checkboxState, setCheckboxState] = useState(false)
+    const [mobileMenuToggle, setMobileMenuToggle] = useState(false);
+    const [checkboxState, setCheckboxState] = useState(false)
 
-  const token = localStorage.getItem('authToken');
-  const userData = useSelector(state => state.auth);
+    const token = localStorage.getItem('authToken');
+    const userData = useSelector(state => state.auth);
 
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-  const navigate = useNavigate();
-  
-  const getUserData = async () => {
-    try {
-      const options = {
-          headers: {
-              'Authorization': `Bearer ${token}`,
-          },
-          method: 'GET',
-      }
+    const navigate = useNavigate();
+    
+    const getUserData = async () => {
+        try {
+        const options = {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+            method: 'GET',
+        }
 
-      const myInfoResponse = await fetch('https://crypto-bulls-back.herokuapp.com/users/my-info', options);
-      const myInfoResult = await myInfoResponse.json();
+        const myInfoResponse = await fetch('https://crypto-bulls-back.herokuapp.com/users/my-info', options);
+        const myInfoResult = await myInfoResponse.json();
 
-      if (myInfoResult) {
-          dispatch(login(myInfoResult));
+        if (myInfoResult) {
+            dispatch(login(myInfoResult));
 
-          const responsePortfolio = await fetch (`https://crypto-bulls-back.herokuapp.com/users/portfolio`, options);
-          const resultPortfolio = await responsePortfolio.json();
-          dispatch(updatePortfolio(resultPortfolio))
-      }
-    } catch (error) {
-      console.log(error.message);
-      navigate('https://crypto-bulls-back.herokuapp.com/login');
+            const responsePortfolio = await fetch (`https://crypto-bulls-back.herokuapp.com/users/portfolio`, options);
+            const resultPortfolio = await responsePortfolio.json();
+            dispatch(updatePortfolio(resultPortfolio))
+        }
+        } catch (error) {
+        console.log(error.message);
+        navigate('/login');
+        }
     }
-  }
 
-  useEffect(() => {
-    getUserData();
-  },[userData.email])
+    useEffect(() => {
+        getUserData();
+    },[userData.email])
 
-  const toggleMobileMenu = () => {
-    setMobileMenuToggle(!mobileMenuToggle);
-    setCheckboxState(!checkboxState);
-  }
+    const toggleMobileMenu = () => {
+        setMobileMenuToggle(!mobileMenuToggle);
+        setCheckboxState(!checkboxState);
+    }
 
-  return (
-    <AppContainer>
-      {mobileMenuToggle && <MobileMenu toggleMobileMenu={toggleMobileMenu} />}
-      <Navbar checkboxState={checkboxState} toggleMobileMenu={toggleMobileMenu} />
-      <Routes>
-        <Route path='/login' exact element={<Login />} />
-        <Route path='/' exact element={<Home />} />
-        <Route path='/register' exact element={<Register />} />
-        <Route path='/portfolio' exact element={<Portfolio />} />
-        <Route path='/coins/:coinId' element={<Coin />} />
-      </Routes>
-    </AppContainer>
-  );
+    return (
+        <AppContainer>
+        {mobileMenuToggle && <MobileMenu toggleMobileMenu={toggleMobileMenu} />}
+        <Navbar checkboxState={checkboxState} toggleMobileMenu={toggleMobileMenu} />
+        <Routes>
+            <Route path='/login' exact element={<Login />} />
+            <Route path='/' exact element={<Home />} />
+            <Route path='/register' exact element={<Register />} />
+            <Route path='/portfolio' exact element={<Portfolio />} />
+            <Route path='/coins/:coinId' element={<Coin />} />
+        </Routes>
+        </AppContainer>
+    );
 }
 
 export default App;

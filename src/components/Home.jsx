@@ -138,11 +138,11 @@ const Home = () => {
             headers: {'Authorization': `Bearer ${token}`},
             method: 'GET',
         }
-        const response = await fetch (`/users/toggle-coin-portfolio/${e.target.dataset.coinId}`, options);
+        const response = await fetch (`https://crypto-bulls-back.herokuapp.com/users/toggle-coin-portfolio/${e.target.dataset.coinId}`, options);
         const result = await response.json();
         console.log(result);
 
-        const responsePortfolio = await fetch (`/users/portfolio`, options);
+        const responsePortfolio = await fetch (`https://crypto-bulls-back.herokuapp.com/users/portfolio`, options);
         const resultPortfolio = await responsePortfolio.json();
         console.log(resultPortfolio);
         dispatch(updatePortfolio(resultPortfolio))
